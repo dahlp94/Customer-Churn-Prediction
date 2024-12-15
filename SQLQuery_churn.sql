@@ -138,7 +138,7 @@ SELECT customer_id, avg_monthly_gb_download, avg_monthly_long_distance_charges,
        streaming_tv, streaming_movies, streaming_music
 FROM telecom_customer_churn;
 
-
+-- Dropping the tables
 DROP TABLE telecom_customer_churn;
 DROP TABLE customer_geography
 DROP TABLE customer_demographics;
