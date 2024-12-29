@@ -39,8 +39,6 @@ Our framework incorporates the following components:
 - **General**: `#717bc5`
 - **Highlighting on Numbers**: `#BABFE7`
 
-### **Branding**
-- **Logo**: DahalCraft - "Chasing Brilliance"
 
 ### Steps:
 
