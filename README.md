@@ -1,11 +1,21 @@
 # Telecom Customer Churn Analysis
 
 ## Tools Used
+
+![SQL](https://img.shields.io/badge/SQL-%23F29111.svg?style=flat&logo=database&logoColor=white) ![Power BI](https://img.shields.io/badge/Power%20BI-%23F2C811.svg?style=flat&logo=power-bi&logoColor=black) ![Python](https://img.shields.io/badge/Python-%233776AB.svg?style=flat&logo=python&logoColor=white)
 - SQL
 - Power BI
 - Python
 
 ## Table of Contents
+1. [Project Objective](#project-objective)
+2. [ETL Framework](#etl-framework)
+3. [Dashboard Development](#dashboard-development)
+   - [Demographic Analysis](#demographic-analysis)
+   - [Payment and Account Information](#payment-and-account-information)
+   - [Services Analysis](#services-analysis)
+
+[Back to Top](#telecom-customer-churn-analysis)
 1. [Project Objective](#project-objective)
 2. [ETL Framework](#etl-framework)
 3. [Dashboard Development](#dashboard-development)
@@ -41,6 +51,15 @@ Our framework incorporates the following components:
 
 
 ### Steps:
+
+#### Overview of Workflow
+
+```mermaid
+graph TD
+A[Source Data] --> B[Azure Data Studio]
+B --> C[PostgreSQL Database]
+C --> D[Power BI Dashboard]
+```
 
 1. **Create a New Column**: `churn_status`
    ```DAX
@@ -86,6 +105,32 @@ Our framework incorporates the following components:
 ---
 
 ### Demographic Analysis
+
+#### Example Visualization
+![Demographic Chart Example](https://via.placeholder.com/600x300?text=Demographic+Chart+Placeholder)
+
+1. **Age Grouping**:
+   Create a reference table `mapping_Age_Group` with age bins:
+   ```DAX
+   if [age] < 21 then "<21"
+   else if [age] < 35 then "21-35"
+   else if [age] < 50 then "35-50"
+   else ">=50"
+   ```
+
+2. **Visualization**:
+   - Line and Stacked Column Chart:
+     - X-axis: `Age Group`
+     - Y-axis: `Churn Rate`
+
+3. **Sorting**:
+   - Add `Age_Sort_Idx` column for sorting:
+     ```Power Query
+     if [Age Group] = "<21" then 1
+     else if [Age Group] = "21-35" then 2
+     else if [Age Group] = "35-50" then 3
+     else 4
+     ```
 
 1. **Age Grouping**:
    Create a reference table `mapping_Age_Group` with age bins:
@@ -147,6 +192,29 @@ Our framework incorporates the following components:
 ---
 
 ### Services Analysis
+
+1. **Services Columns**:
+   - Unpivot services columns (e.g., `phone_service`, `multiple_lines`, etc.).
+   - Rename columns to `Service` and `Status`.
+
+#### Example Visualization
+![Services Analysis Chart](https://via.placeholder.com/600x300?text=Services+Chart+Placeholder)
+
+2. **Matrix Visualization**:
+   - Rows: `Service`
+   - Columns: `Status`
+   - Values: `Churn Status` (formatted as percentages)
+
+3. **Pie Chart**:
+   - Group `total_revenue` by `contract` type.
+
+4. **Dropdown Filters**:
+   - Add slicers for `monthly_charge_status` and `married` columns.
+
+5. **Toolkit**:
+   - Visualize `Total Churn` by `churn_category` and `churn_reason`. 
+
+[Back to Top](#telecom-customer-churn-analysis)
 
 1. **Services Columns**:
    - Unpivot services columns (e.g., `phone_service`, `multiple_lines`, etc.).
